@@ -6,3 +6,4 @@ adb.egg-info/
 /adb.zip
 /fastboot.zip
 .env/
+.vscode/
