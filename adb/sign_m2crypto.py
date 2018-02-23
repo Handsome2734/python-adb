@@ -12,7 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from M2Crypto import RSA
+# from M2Crypto import RSA
+from cryptography.hazmat.backends import default_backend
+from cryptography.hazmat.primitives import serialization
 
 from adb import adb_protocol
 
@@ -24,7 +26,13 @@ class M2CryptoSigner(adb_protocol.AuthSigner):
     with open(rsa_key_path + '.pub') as rsa_pub_file:
       self.public_key = rsa_pub_file.read()
 
-    self.rsa_key = RSA.load_key(rsa_key_path)
+    with open(rsa_key_path, 'rb') as key_file:
+      self.rsa_key = serialization.load_pem_private_key(
+        key_file.read(),
+        password=None,
+        backend=default_backend
+      )
+    # self.rsa_key = RSA.load_key(rsa_key_path)
 
   def Sign(self, data):
     return self.rsa_key.sign(data, 'sha1')
