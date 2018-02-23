@@ -4,7 +4,7 @@ from adb import adb_commands
 from adb import sign_m2crypto
 from adb import sign_pythonrsa
 
-signer = sign_m2crypto.CrpytographySigner(
+signer = sign_m2crypto.CryptographySigner(
   path.expanduser('~/.android/adbkey')
 )
 # signer = sign_pythonrsa.PythonRSASigner(
@@ -19,3 +19,5 @@ device = adb_commands.AdbCommands.ConnectDevice(
 
 for i in xrange(10):
   print device.Shell('echo %d' % i)
+
+print device.Shell('ls')

@@ -38,7 +38,7 @@ class M2CryptoSigner(adb_protocol.AuthSigner):
     return self.public_key
 
 
-class CrpytographySigner(adb_protocol.AuthSigner):
+class CryptographySigner(adb_protocol.AuthSigner):
 
   def __init__(self, rsa_key_path):
     with open(rsa_key_path + '.pub') as rsa_pub_file:
